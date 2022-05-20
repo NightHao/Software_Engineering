@@ -1,0 +1,3 @@
+0 WITH mask
+1 NO mask
+2 NOT proper mask
