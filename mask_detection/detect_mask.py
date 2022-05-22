@@ -26,6 +26,7 @@ class DetectCamera(Detect):
     
     def change_model(self, model):
         self.model = model
+    
     def image_processing(self):
         cap = cv2.VideoCapture(0)
 
@@ -33,45 +34,31 @@ class DetectCamera(Detect):
             # 從攝影機擷取一張影像
             ret, frame = cap.read()
             
-            # Create the array of the right shape to feed into the keras model  
-            # The 'length' or number of images you can put into the array is
-            # determined by the first position in the shape tuple, in this case 1.
             data = np.ndarray(shape=(1, 224, 224, 3), dtype=np.float32)
-            # Replace this with the path to your image
+
             image = Image.fromarray(np.uint8(frame))
-            #resize the image to a 224x224 with the same strategy as in TM2:
-            #resizing the image to be at least 224x224 and then cropping from the center
+
             size = (224, 224)
             image = ImageOps.fit(image, size, Image.ANTIALIAS)
 
-            #turn the image into a numpy array
             image_array = np.asarray(image)
-            # Normalize the image
+
             normalized_image_array = (image_array.astype(np.float32) / 127.0) - 1
-            # Load the image into the array
+
             data[0] = normalized_image_array
 
-            # run the inference
             prediction = self.model.predict(data)
             frame_and_cap = [frame, cap]
             self.result(prediction, frame_and_cap)
             
     def result(self, prediction, image):
         frame, cap = image
-        #print(prediction)
-        #print('WITH mask:','%2.1f' % (prediction[0][0]*100),'%')
-        #print('NO mask:','%2.1f' % (prediction[0][1]*100),'%')
-        #print('NOT proper mask:','%2.1f' % (prediction[0][2]*100),'%')
-        #print('\nresult:',end='')
         if prediction[0][0] > prediction[0][1] and prediction[0][0] > prediction[0][2]:
             cv2.putText(frame, 'WITH mask', (10, 40), cv2.FONT_HERSHEY_SIMPLEX,1, (0, 255, 0), 3, cv2.LINE_AA)
-            #print('WITH mask')
         elif prediction[0][1] > prediction[0][0] and prediction[0][1] > prediction[0][2]:
             cv2.putText(frame, 'NO mask', (10, 40), cv2.FONT_HERSHEY_SIMPLEX,1, (0, 0, 255), 3, cv2.LINE_AA)
-            #print('NO mask') 
         else:
             cv2.putText(frame, 'NOT proper mask', (10, 40), cv2.FONT_HERSHEY_SIMPLEX,1, (0, 255, 255), 3, cv2.LINE_AA)
-            #print('NOT proper mask')
         
         # 顯示圖片
         cv2.imshow('frame', frame)
@@ -92,43 +79,29 @@ class DetectCamera(Detect):
 class DetectImage(Detect):
     def __init__(self):
         self.model = load_model('keras_model.h5')
-        
-    def opt(self):
-        parser = argparse.ArgumentParser()
-        parser.add_argument('-s','--source', type=str, default='test.jpg', help='image path')
-        self.opt = parser.parse_args()
     
+    def opt(self,path):
+        self.path=path
+       
     def change_model(self, model): #可選擇model
         self.model = model
         
     def image_processing(self):
-        # Create the array of the right shape to feed into the keras model
-        # The 'length' or number of images you can put into the array is
-        # determined by the first position in the shape tuple, in this case 1.
         data = np.ndarray(shape=(1, 224, 224, 3), dtype=np.float32)
-        # Replace this with the path to your image
-        path=self.opt.source
+        path=self.path
         print('path:',path)
-        image = Image.open(self.opt.source)
-        #print(type(image))
-        #resize the image to a 224x224 with the same strategy as in TM2:
-        #resizing the image to be at least 224x224 and then cropping from the center
+        image = Image.open(path)
         size = (224, 224)
         image = ImageOps.fit(image, size, Image.ANTIALIAS)
-        #turn the image into a numpy array
         image_array = np.asarray(image)
-        # Normalize the image
         normalized_image_array = (image_array.astype(np.float32) / 127.0) - 1
-        # Load the image into the array
         data[0] = normalized_image_array
-        # run the inference
         prediction = self.model.predict(data)
         
         return self.result(prediction, image)
         
     def result(self, prediction, image):
         image.show()#pillow 顯示圖片函式
-        #print(prediction)
         print('WITH mask:','%2.1f' % (prediction[0][0]*100),'%')
         print('NO mask:','%2.1f' % (prediction[0][1]*100),'%')
         print('NOT proper mask:','%2.1f' % (prediction[0][2]*100),'%')
@@ -143,15 +116,9 @@ class DetectImage(Detect):
             print('NOT proper mask')
             return 2,image  
 
-
-#可能需要統一相片編號
-#parser = argparse.ArgumentParser()
-#parser.add_argument('-s','--source', type=str, default='test.jpg', help='image path')
-#opt = parser.parse_args()
-
 #detector=DetectImage()
 #detector.opt()
 #detector.image_processing()
 
-test = DetectCamera()
-test.image_processing()
+#test = DetectCamera()
+#test.image_processing()
