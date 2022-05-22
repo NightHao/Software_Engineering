@@ -1,6 +1,6 @@
 import argparse
 import detect_mask as mask
-class detect_main:
+class DetectMain:
     def __init__(self):
         self.image_model=mask.DetectImage()
         self.camera_model=mask.DetectCamera()
@@ -17,5 +17,5 @@ class detect_main:
             self.image_model.opt(Input)
             res,resImage=self.image_model.image_processing()
 
-detector=detect_main()
+detector=DetectMain()
 detector.detect()
