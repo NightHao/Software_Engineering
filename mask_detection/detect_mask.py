@@ -49,24 +49,23 @@ class DetectCamera(Detect):
 
             prediction = self.model.predict(data)
             frame_and_cap = [frame, cap]
-            self.result(prediction, frame_and_cap)
+            return self.result(prediction, frame_and_cap)
             
     def result(self, prediction, image):
         frame, cap = image
         if prediction[0][0] > prediction[0][1] and prediction[0][0] > prediction[0][2]:
-            cv2.putText(frame, 'WITH mask', (10, 40), cv2.FONT_HERSHEY_SIMPLEX,1, (0, 255, 0), 3, cv2.LINE_AA)
+            #cv2.putText(frame, 'WITH mask', (10, 40), cv2.FONT_HERSHEY_SIMPLEX,1, (0, 255, 0), 3, cv2.LINE_AA)
+            return (0, frame)
         elif prediction[0][1] > prediction[0][0] and prediction[0][1] > prediction[0][2]:
-            cv2.putText(frame, 'NO mask', (10, 40), cv2.FONT_HERSHEY_SIMPLEX,1, (0, 0, 255), 3, cv2.LINE_AA)
+            #cv2.putText(frame, 'NO mask', (10, 40), cv2.FONT_HERSHEY_SIMPLEX,1, (0, 0, 255), 3, cv2.LINE_AA)
+            return (1, frame)
         else:
-            cv2.putText(frame, 'NOT proper mask', (10, 40), cv2.FONT_HERSHEY_SIMPLEX,1, (0, 255, 255), 3, cv2.LINE_AA)
-        
+            #cv2.putText(frame, 'NOT proper mask', (10, 40), cv2.FONT_HERSHEY_SIMPLEX,1, (0, 255, 255), 3, cv2.LINE_AA)
+            return (2, frame)
         # 顯示圖片
-        cv2.imshow('frame', frame)
-
-        # 若按下 q 鍵則離開迴圈
-        if cv2.waitKey(1) & 0xFF == ord('q'):
-            self.camera_release(cap)
-            #break
+        #cv2.imshow('frame', frame)
+        
+        
     
     def camera_release(self, cap):
         # 釋放攝影機
@@ -101,7 +100,7 @@ class DetectImage(Detect):
         return self.result(prediction, image)
         
     def result(self, prediction, image):
-        image.show()#pillow 顯示圖片函式
+        #image.show()#pillow 顯示圖片函式
         print('WITH mask:','%2.1f' % (prediction[0][0]*100),'%')
         print('NO mask:','%2.1f' % (prediction[0][1]*100),'%')
         print('NOT proper mask:','%2.1f' % (prediction[0][2]*100),'%')
