@@ -8,7 +8,7 @@ class DetectMain:
         self.screen = show.ShowOnMonitor() 
     def opt(self):
         parser = argparse.ArgumentParser()
-        parser.add_argument('-s','--source', type=str, default='IMG_4340.jpg', help='image path')
+        parser.add_argument('-s','--source', type=str, default='test.jpg', help='image path')
         self.opt = parser.parse_args()
     def detect(self):
         self.opt()
