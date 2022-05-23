@@ -5,17 +5,17 @@ from gtts import gTTS # langulage code list: https://developers.google.com/admin
     
 class Speaker():
     """docstring for speaker. Speaker is for speaking waring."""
+    
     __texts={"en":"please wear on your mask","zh-tw":"請戴上口罩","ja":"マスクをする"}
-    """def __init__(self, arg):
-        super(speaker, self).__init__()
-        self.arg = arg"""
+    
+    #def __init__(self):
 
     def show_setting_GUI(self):
         end
 
     def speak_warning(self):
-        for text in __texts.keys():
-            __speak(text,__texts.get(text))
+        for language in self.__texts:
+            self.__speak(self.__texts.get(language),language)
 
     def test(self):
         print("start test")
@@ -26,11 +26,11 @@ class Speaker():
     def __speak(self,mytext, mylang="en"):
         try:
             print('make '+mylang+': '+mytext)
-            time.sleep(1)
             tts = gTTS(text=mytext, tld="com", lang=mylang)
             filename = mylang+"_alarm_voice.mp3"
             tts.save(filename)
-            __play(filename)
+            time.sleep(0.5)
+            self.__play(filename)
             os.remove(filename)
         except:
             print('error when make '+mylang+': '+mytext)
@@ -42,10 +42,11 @@ class Speaker():
         except:
             print('error when play '+filename)
 
-'''
+
 speaker =Speaker()
 print("start")
 speaker.test()
-'''
+speaker.speak_warning()
+
 # according https://stackoverflow.com/a/64367776/17732660
 # gTTS of gtts doc https://gtts.readthedocs.io/en/latest/module.html#gtts.tts.gTTS
