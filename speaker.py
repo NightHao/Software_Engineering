@@ -12,14 +12,21 @@ import playsound # please use playsound==1.2.2 to avoid unexpected error
 from gtts import gTTS # langulage code list: https://developers.google.com/admin-sdk/directory/v1/languages
     
 class Speaker():
-    """docstring for speaker. Speaker is for speaking waring."""
+    """
+    docstring for speaker.
+    Speaker is for speaking waring.
+    show_setting_gui(), speak_warning() and test() is public func can be called.
+    show_setting_gui(): show the GUI for setting and test.
+    speak_warning(): speak the setted warning texts.
+    test(): speak the defalt test text.
+    """
     
     __texts={"en":"please wear on your mask","zh-tw":"請戴上口罩","ja":"マスクをする"}
     
     def __init__(self):
         pass
 
-    def show_setting_GUI(self):
+    def show_setting_gui(self):
         window=tk.Tk()
         window.title("Sound Warning Setting")
         window.geometry("800x400+250+150")
@@ -94,7 +101,7 @@ speaker =Speaker()
 print("start")
 #speaker.test()
 #speaker.speak_warning()
-speaker.show_setting_GUI()
+speaker.show_setting_gui()
 speaker.speak_warning()
 '''
 # according https://stackoverflow.com/a/64367776/17732660
