@@ -3,4 +3,4 @@ numpy
 tensorflow
 keras
 argparse
-opencv-
+opencv-python
