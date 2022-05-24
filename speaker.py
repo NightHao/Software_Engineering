@@ -74,7 +74,7 @@ class Speaker():
             print(en_text)
             print(zh_text)
             print(ja_text)
-            tkinter.messagebox.showinfo(title = '設定完成',message = "語音設定完成")
+            # tkinter.messagebox.showinfo(title = '設定完成',message = "語音設定完成")
         except:
             print('Sound setup FAILED!')
 
@@ -113,8 +113,8 @@ class Speaker():
 '''
 speaker =Speaker(ja_text="123")
 print("start")
-#speaker.test()
-#speaker.speak_warning()
+# speaker.test()
+# speaker.speak_warning()
 speaker.show_setting_gui()
 print(speaker.get_texts())
 # speaker.speak_warning()
