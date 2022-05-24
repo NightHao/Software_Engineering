@@ -24,7 +24,13 @@ class Speaker():
     
     __texts={"en":"please wear on your mask","zh-tw":"請戴上口罩","ja":"マスクをする"}
     
-    def __init__(self):
+    def __init__(self,en_text=None,zh_text=None,ja_text=None):
+        if en_text!=None:
+            self.__texts["en"]=en_text
+        if zh_text!=None:
+            self.__texts["zh-tw"]=zh_text
+        if ja_text!=None:
+            self.__texts["ja"]=ja_text
         pass
 
     def show_setting_gui(self):
@@ -104,7 +110,7 @@ class Speaker():
             print('error when play '+filename)
 
 '''
-speaker =Speaker()
+speaker =Speaker(ja_text="123")
 print("start")
 #speaker.test()
 #speaker.speak_warning()
