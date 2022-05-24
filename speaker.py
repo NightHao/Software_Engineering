@@ -15,7 +15,7 @@ class Speaker():
     """
     docstring for speaker.
     Speaker is for speaking waring.
-    set_warning(), show_setting_gui(), speak_warning() and test() is public func can be called.
+    set_warning(), get_texts(), show_setting_gui(), speak_warning() and test() is public func can be called.
     set_warning(en_text,zh_text,ja_text) - can set the warning texts.
     get_texts() - get the warning texts have been setted.
     show_setting_gui() - show the GUI for setting and test.
