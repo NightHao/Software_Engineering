@@ -16,10 +16,11 @@ class Speaker():
     docstring for speaker.
     Speaker is for speaking waring.
     set_warning(), show_setting_gui(), speak_warning() and test() is public func can be called.
-    set_warning(en_text,zh_text,ja_text) - 
+    set_warning(en_text,zh_text,ja_text) - can set the warning texts.
+    get_texts() - get the warning texts have been setted.
     show_setting_gui() - show the GUI for setting and test.
     speak_warning() - speak the setted warning texts.
-    test() - speak the defalt test text.
+    test() - speak the defalt test texts.
     """
     
     __texts={"en":"please wear on your mask","zh-tw":"請戴上口罩","ja":"マスクをする"}
