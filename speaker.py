@@ -15,10 +15,11 @@ class Speaker():
     """
     docstring for speaker.
     Speaker is for speaking waring.
-    show_setting_gui(), speak_warning() and test() is public func can be called.
-    show_setting_gui(): show the GUI for setting and test.
-    speak_warning(): speak the setted warning texts.
-    test(): speak the defalt test text.
+    set_warning(), show_setting_gui(), speak_warning() and test() is public func can be called.
+    set_warning(en_text,zh_text,ja_text) - 
+    show_setting_gui() - show the GUI for setting and test.
+    speak_warning() - speak the setted warning texts.
+    test() - speak the defalt test text.
     """
     
     __texts={"en":"please wear on your mask","zh-tw":"請戴上口罩","ja":"マスクをする"}
@@ -52,20 +53,26 @@ class Speaker():
         user_test_button=tk.Button(window,text="測試目前警告音效",command=self.speak_warning)
         user_test_button.pack()
 
-        apply_button=tk.Button(window,text="套用",command=lambda: self.__on_apply_button(en_entry.get(),zh_entry.get(),ja_entry.get()) )
+        apply_button=tk.Button(window,text="套用",command=lambda: self.set_warning(en_entry.get(),zh_entry.get(),ja_entry.get()) )
         apply_button.pack()
 
         window.mainloop()
 
-    def __on_apply_button(self,en_text,zh_text,ja_text):
-        self.__texts["en"]=en_text
-        self.__texts["zh-tw"]=zh_text
-        self.__texts["ja"]=ja_text
-        print("設定為:")
-        print(en_text)
-        print(zh_text)
-        print(ja_text)
-        tkinter.messagebox.showinfo(title = '設定完成',message = "語音設定完成")
+    def set_warning(self,en_text,zh_text,ja_text):
+        try:
+            self.__texts["en"]=en_text
+            self.__texts["zh-tw"]=zh_text
+            self.__texts["ja"]=ja_text
+            print("設定為:")
+            print(en_text)
+            print(zh_text)
+            print(ja_text)
+            tkinter.messagebox.showinfo(title = '設定完成',message = "語音設定完成")
+        except:
+            print('Sound setup FAILED!')
+
+    def get_texts(self):
+        return self.__texts["en"],self.__texts["zh-tw"],self.__texts["ja"]
 
     def speak_warning(self):
         for language in self.__texts:
@@ -102,7 +109,8 @@ print("start")
 #speaker.test()
 #speaker.speak_warning()
 speaker.show_setting_gui()
-speaker.speak_warning()
+print(speaker.get_texts())
+# speaker.speak_warning()
 '''
 # according https://stackoverflow.com/a/64367776/17732660
 # gTTS of gtts doc https://gtts.readthedocs.io/en/latest/module.html#gtts.tts.gTTS
