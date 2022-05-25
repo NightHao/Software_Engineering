@@ -1,7 +1,6 @@
 import os
 import time
 import pygame
-import playsound # please use playsound==1.2.2 to avoid unexpected error
 from gtts import gTTS # langulage code list: https://developers.google.com/admin-sdk/directory/v1/languages
     
 class Speaker():

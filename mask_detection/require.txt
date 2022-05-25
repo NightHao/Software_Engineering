@@ -4,5 +4,5 @@ tensorflow
 keras
 argparse
 opencv-python
-playsound==1.2.2
+pygame
 gtts
