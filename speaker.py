@@ -64,7 +64,6 @@ class Speaker():
             tts = gTTS(text=mytext, tld="com", lang=mylang)
             filename = mylang+"_alarm_voice.mp3"
             tts.save(filename)
-            tts.save("buffer.mp3")
             self.__play(filename)
             os.remove(filename)
         except:
