@@ -26,11 +26,64 @@ class Speaker():
     
     def speak_warning(self,situation):
         if situation==0:
-            self.__speak(self.__with_texts.get(self.__language),self.__language)
+            mytext=self.__with_texts.get(self.__language)
+            mylang=self.__language
+            try:#try to make tts mp3 file
+                tts = gTTS(text=mytext, tld="com", lang=mylang)
+                filename = mylang+"_alarm_voice.mp3"
+                tts.save(filename)
+                try:#try to play file
+                    pygame.mixer.music.load('./'+filename)
+                    pygame.mixer.music.set_volume(self.__volume)
+                    pygame.mixer.music.play()
+                    while pygame.mixer.music.get_busy():
+                        time.sleep(0.1)
+                    pygame.mixer.music.unload()
+                except:
+                    print('error when play '+filename)
+                os.remove(filename)
+            except:
+                print('error when speak '+mylang+': '+mytext)
+
         elif situation==1:
-            self.__speak(self.__no_texts.get(self.__language),self.__language)
+            mytext=self.__no_texts.get(self.__language)
+            mylang=self.__language
+            try:#try to make tts mp3 file
+                tts = gTTS(text=mytext, tld="com", lang=mylang)
+                filename = mylang+"_alarm_voice.mp3"
+                tts.save(filename)
+                try:#try to play file
+                    pygame.mixer.music.load('./'+filename)
+                    pygame.mixer.music.set_volume(self.__volume)
+                    pygame.mixer.music.play()
+                    while pygame.mixer.music.get_busy():
+                        time.sleep(0.1)
+                    pygame.mixer.music.unload()
+                except:
+                    print('error when play '+filename)
+                os.remove(filename)
+            except:
+                print('error when speak '+mylang+': '+mytext)
+
         elif situation==2:
-            self.__speak(self.__no_proper_texts.get(self.__language),self.__language)
+            mytext=self.__no_proper_texts.get(self.__language)
+            mylang=self.__language
+            try:#try to make tts mp3 file
+                tts = gTTS(text=mytext, tld="com", lang=mylang)
+                filename = mylang+"_alarm_voice.mp3"
+                tts.save(filename)
+                try:#try to play file
+                    pygame.mixer.music.load('./'+filename)
+                    pygame.mixer.music.set_volume(self.__volume)
+                    pygame.mixer.music.play()
+                    while pygame.mixer.music.get_busy():
+                        time.sleep(0.1)
+                    pygame.mixer.music.unload()
+                except:
+                    print('error when play '+filename)
+                os.remove(filename)
+            except:
+                print('error when speak '+mylang+': '+mytext)
 
     def set_language(self,mylang):
         self.__language=mylang
@@ -51,36 +104,6 @@ class Speaker():
                 print("set "+self.__language+' no_proper_texts to '+text)
         except:
             print('Sound setup FAILED!')
-
-    def test(self):
-        print("start test")
-        self.__speak("this is speaker test",'en')
-        self.__speak("這是語音測試",'zh-tw')
-        self.__speak("これは音声テストです",'ja')
-
-    def __speak(self,mytext, mylang="en"):
-        try:
-            # print('make '+mylang+': '+mytext)
-            tts = gTTS(text=mytext, tld="com", lang=mylang)
-            filename = mylang+"_alarm_voice.mp3"
-            tts.save(filename)
-            self.__play(filename)
-            os.remove(filename)
-        except:
-            print('error when speak '+mylang+': '+mytext)
-
-    def __play(self,filename):
-        try:
-            # print('play '+filename)
-            pygame.mixer.music.load('./'+filename)
-            pygame.mixer.music.set_volume(self.__volume)
-            pygame.mixer.music.play()
-            while pygame.mixer.music.get_busy():
-                time.sleep(0.1)
-            pygame.mixer.music.unload()
-
-        except:
-            print('error when play '+filename)
 
 '''
 speaker =Speaker()
