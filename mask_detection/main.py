@@ -1,11 +1,13 @@
 import argparse
 import detect_mask as mask
-import show 
+import show
+import speaker 
 class DetectMain:
     def __init__(self):
         self.image_model=mask.DetectImage()
         self.camera_model=mask.DetectCamera()
         self.screen = show.ShowOnMonitor() 
+        self.audio = speaker.Speaker()
     def opt(self):
         parser = argparse.ArgumentParser()
         parser.add_argument('-s','--source', type=str, default='test.jpg', help='image path')
