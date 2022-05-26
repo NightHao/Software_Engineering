@@ -8,9 +8,9 @@ class Speaker():
     docstring for speaker.
     Speaker is for speaking waring.
     speak_warning(), set_language(), set_volume() and set_warning() is public func can be called.
-    speak_warning(int) - speak the setted warning texts.0: with mask 1: no mask 2: no proper mask.
+    speak_warning(int situation) - speak the setted warning texts.0: with mask 1: no mask 2: no proper mask.
     set_language(string mylang) - set the language.
-    set_volume() - set the volume from 0-100.
+    set_volume(int volume) - set the volume from 0-100.
     set_warning(int situation, string text) - can set the warning texts.
     """
     #0: with mask 1: no mask 2: no proper mask
