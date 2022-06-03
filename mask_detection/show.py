@@ -44,7 +44,7 @@ class ShowOnMonitor:
         self.fg=new_fg
         
     def modify_font(self,new_font):
-        self.font=new_font
+        self.font=new_font,50
         
     def setting(self):
         
@@ -114,7 +114,7 @@ class ShowOnMonitor:
         window.title('window')
         window.geometry('1280x720')
         window.configure(bg=self.bg)
-        lbl_1 = tk.Label(window, text=self.text[result], bg=self.label_bg[result], fg=self.fg, font=self.font)
+        lbl_1 = tk.Label(window, text=self.text[result], bg=self.label_bg[result], fg=self.fg, font=(self.font,'30'))
         lbl_1.grid(column=0, row=2)
         self.img=img
         self.img = self.img.resize((self.img.width*2,self.img.height*2))
