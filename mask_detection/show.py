@@ -115,13 +115,15 @@ class ShowOnMonitor:
         window.geometry('1280x720')
         window.configure(bg=self.bg)
         lbl_1 = tk.Label(window, text=self.text[result], bg=self.label_bg[result], fg=self.fg, font=(self.font,'30'))
-        lbl_1.grid(column=0, row=2)
+        #lbl_1.grid(column=0, row=2)
+        lbl_1.pack()
         self.img=img
         self.img = self.img.resize((self.img.width*2,self.img.height*2))
         imgtk=ImageTk.PhotoImage(self.img)
         lb=tk.Label(window,image=imgtk)
         lb.image = imgtk
-        lb.grid(column=0,row=3)
+        #lb.grid(column=0,row=3)
+        lb.pack()
         window.mainloop()
 
 #img = Image.open('test.jpg')
