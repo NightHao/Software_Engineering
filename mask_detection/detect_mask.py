@@ -29,8 +29,8 @@ class DetectCamera(Detect):
     
     def image_processing(self):
         cap = cv2.VideoCapture(0)
-
-        while(True):
+        res_judge = []
+        while(len(res_judge) < 20):
             # 從攝影機擷取一張影像
             ret, frame = cap.read()
             
@@ -49,7 +49,13 @@ class DetectCamera(Detect):
 
             prediction = self.model.predict(data)
             frame_and_cap = [frame, cap]
-            return self.result(prediction, frame_and_cap)
+            res, res_frame =  self.result(prediction, frame_and_cap)
+            res_judge.append(res)
+            #return self.result(prediction, frame_and_cap)
+        cv2.imwrite("output.jpg", res_frame, [cv2.IMWRITE_JPEG_QUALITY, 100])
+        res_image = Image.open("output.jpg")
+        max_times = max(res_judge, key=res_judge.count)
+        return (max_times, res_image)
             
     def result(self, prediction, image):
         frame, cap = image
@@ -65,8 +71,6 @@ class DetectCamera(Detect):
         # 顯示圖片
         #cv2.imshow('frame', frame)
         
-        
-    
     def camera_release(self, cap):
         # 釋放攝影機
         cap.release()

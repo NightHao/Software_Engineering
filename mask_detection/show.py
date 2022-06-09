@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import ttk
 import time
+import cv2
 from PIL import Image, ImageTk
 class ShowOnMonitor:
     def __init__(self):

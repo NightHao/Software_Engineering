@@ -25,10 +25,16 @@ class DetectMain:
         window = tk.Tk()
         window.title('window')
         window.geometry('1280x720')
-        detect_button = tk.Button(window, text='開始偵測', command = lambda: self.execute(window))
-        detect_button.grid()
-        setting_button = tk.Button(window, text='設定',command = lambda: self.setting(window))
-        setting_button.grid()
+    
+        #detect_button = tk.Button(window, text='開始偵測',font=('Arial','24'),command = lambda: self.execute(window))
+        imgBtn = tk.PhotoImage(file='111.png')
+        #imgBtn=imgBtn.resize(imgBtn.width//3,imgBtn.height//3)
+        detect_button = tk.Button(window,image=imgBtn,command = lambda: self.execute(window))
+        
+        detect_button.pack()
+        
+        setting_button = tk.Button(window, text='設定',font=('Arial','24'),command = lambda: self.setting(window))
+        setting_button.pack()
         window.mainloop()
         
     def opt(self):
@@ -40,13 +46,13 @@ class DetectMain:
     def detect(self):
         #self.opt()
         Input="test.jpg"
-        if(Input=="cam"):
-            res, res_image = self.camera_model.image_processing()
+        if(Input=="image"):
+            self.image_model.opt(Input)
+            res, res_image=self.image_model.image_processing()
             self.audio.speak_warning(res)
             self.screen.show(res, res_image)
         else:
-            self.image_model.opt(Input)
-            res, res_image=self.image_model.image_processing()
+            res, res_image = self.camera_model.image_processing()
             self.audio.speak_warning(res)
             self.screen.show(res, res_image)
 detector=DetectMain()
