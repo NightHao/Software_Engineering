@@ -1,6 +1,8 @@
 import os
 import time
 import pygame
+import tkinter as tk
+from tkinter import ttk
 from gtts import gTTS # langulage code list: https://developers.google.com/admin-sdk/directory/v1/languages
     
 class Speaker():
@@ -23,7 +25,34 @@ class Speaker():
         self.__with_texts={"en":"mask checked","zh-tw":"已戴上口罩"}
         self.__no_texts={"en":"please wear on your mask","zh-tw":"請戴上口罩"}
         self.__no_proper_texts={"en":"please wear on your mask properly","zh-tw":"請戴好口罩，遮住口鼻"}
-    
+        
+    def setting(self):
+        soundwindow = tk.Tk()
+        soundwindow.title('sound')
+        soundwindow.geometry('1280x720')
+        label1 = tk.Label(soundwindow,text='Sound Setting',font=('Arial','24'),bg='white').grid(column=1,row=0)
+        label2 = tk.Label(soundwindow,text='Language',font=('Arial','20'),bg='white').grid(column=1,row=1)
+        languages = ["en","zh-tw"]
+        self.language = ttk.Combobox(soundwindow, state='readonly')
+        self.language['values'] = languages
+        self.language.grid(column=1,row=2)
+        self.language.current(0)
+        self.language_button=tk.Button(soundwindow, text='Change', command= self.choose_language)
+        self.language_button.grid(column=2,row=2)
+        
+        label3 = tk.Label(soundwindow,text='volume',font=('Arial','20'),bg='white').grid(column=1,row=3)
+        font = ('Arial', 20)
+        select = tk.IntVar()
+        scale = tk.Scale(label='Scale Widget', font=font, orient=tk.HORIZONTAL, showvalue=False,bg='green', fg='white', tickinterval=20, length=800, width=30,troughcolor='blue', variable=select, command=self.set_volume)
+        scale.grid(column=1,row=4)
+        self.label = tk.Label(text='', width=40, font=font)
+        self.label.grid(row=2, column=4)
+        
+        
+        soundwindow.mainloop()
+        
+    def choose_language(self):
+        self.set_language(self.language.get())
     def speak_warning(self,situation):
         if situation==0:
             mytext=self.__with_texts.get(self.__language)
@@ -53,12 +82,12 @@ class Speaker():
             os.remove(filename)
         except:
             print('error when speak '+mylang+': '+mytext)
-
+        
     def set_language(self,mylang):
         self.__language=mylang
 
     def set_volume(self,volume):
-        self.__volume=volume/100
+        self.__volume=int(volume)/100
 
     def set_warning(self,situation,text):
         try:

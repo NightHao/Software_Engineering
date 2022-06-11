@@ -22,7 +22,7 @@ class Detect(ABC):
 #影像偵測
 class DetectCamera(Detect):
     def __init__(self):
-        self.model = load_model('keras_model.h5')
+        self.model = load_model('keras_model_strong.h5')
     
     def change_model(self, model):
         self.model = model
