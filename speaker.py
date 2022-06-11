@@ -105,17 +105,16 @@ class Speaker():
         except:
             print('Sound setup FAILED!')
 
-'''
-speaker =Speaker()
-print("start")
-# speaker.test()
-speaker.set_language("zh-tw")
-speaker.set_warning(2,"遮住口鼻")
-speaker.set_volume(100)
-speaker.speak_warning(2)
-speaker.set_volume(30)
-speaker.speak_warning(2)
-'''
+if __name__=='__main__':
+    speaker =Speaker()
+    print("start")
+    # speaker.test()
+    speaker.set_language("zh-tw")
+    speaker.set_warning(2,"遮住口鼻")
+    speaker.set_volume(100)
+    speaker.speak_warning(2)
+    speaker.set_volume(30)
+    speaker.speak_warning(2)
 
 # according https://stackoverflow.com/a/64367776/17732660
 # gTTS of gtts doc https://gtts.readthedocs.io/en/latest/module.html#gtts.tts.gTTS
