@@ -44,7 +44,7 @@ class ShowOnMonitor:
     def setting(self):
         settingwindow = tk.Tk()
         settingwindow.title('window')
-        settingwindow.geometry('1280x720')
+        settingwindow.geometry('800x800')
         settingwindow.configure(bg=self.bg)
         label1 = tk.Label(settingwindow,text='Monitor Setting',font=('Arial','24'),bg='white').grid(column=1,row=0)
         label2 = tk.Label(settingwindow,text='Background',font=('Arial','20'),bg='white').grid(column=1,row=1)
