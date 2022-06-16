@@ -48,11 +48,13 @@ class Speaker():
         self.label = tk.Label(text='', width=40, font=font)
         self.label.grid(row=2, column=4)
         
-        
         soundwindow.mainloop()
         
+
     def choose_language(self):
         self.set_language(self.language.get())
+
+
     def speak_warning(self,situation):
         if situation==0:
             mytext=self.__with_texts.get(self.__language)
@@ -83,11 +85,14 @@ class Speaker():
         except:
             print('error when speak '+mylang+': '+mytext)
         
+
     def set_language(self,mylang):
         self.__language=mylang
 
+
     def set_volume(self,volume):
         self.__volume=int(volume)/100
+
 
     def set_warning(self,situation,text):
         try:
@@ -103,17 +108,28 @@ class Speaker():
         except:
             print('Sound setup FAILED!')
 
-'''
-speaker =Speaker()
-print("start")
-# speaker.test()
-speaker.set_language("zh-tw")
-speaker.set_warning(2,"遮住口鼻")
-speaker.set_volume(100)
-speaker.speak_warning(2)
-speaker.set_volume(30)
-speaker.speak_warning(2)
-'''
+    def test_show(self):
+        print("language: "+self.__language)
+        print("situation 0: "+self.__with_texts[self.__language])
+        print("situation 0: "+self.__no_texts[self.__language])
+        print("situation 0: "+self.__no_proper_texts[self.__language])
+        print("volume: "+self.__volume)
+
+
+if __name__=='__main__':
+    speaker =Speaker()
+    print("start")
+    speaker.set_language("zh-tw")
+    speaker.set_warning(2,"遮住口鼻")
+    speaker.set_volume(100)
+    speaker.speak_warning(2)
+    speaker.set_volume(30)
+    speaker.speak_warning(2)
+    print("聲音測試結束，呼叫設定視窗，請按任意鍵繼續")
+    os.system("pause")
+    speaker.setting()
+    speaker.speak_warning(2)
+
 
 # according https://stackoverflow.com/a/64367776/17732660
 # gTTS of gtts doc https://gtts.readthedocs.io/en/latest/module.html#gtts.tts.gTTS
