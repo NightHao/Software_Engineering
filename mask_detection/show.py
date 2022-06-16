@@ -45,10 +45,9 @@ class ShowOnMonitor:
         settingwindow = tk.Tk()
         settingwindow.title('window')
         settingwindow.geometry('800x800')
-        settingwindow.configure(bg=self.bg)
-        label1 = tk.Label(settingwindow,text='Monitor Setting',font=('Arial','24'),bg='white').grid(column=1,row=0)
-        label2 = tk.Label(settingwindow,text='Background',font=('Arial','20'),bg='white').grid(column=1,row=1)
-        bg_colors = ['purple','green','orange','yellow','red','white']
+        label1 = tk.Label(settingwindow,text='Monitor Setting',font=('Arial','24')).grid(column=1,row=0)
+        label2 = tk.Label(settingwindow,text='Background',font=('Arial','20')).grid(column=1,row=1)
+        bg_colors = ['white','purple','green','orange','yellow','red']
         self.bg_color = ttk.Combobox(settingwindow, state='readonly')
         self.bg_color['values'] = bg_colors
         self.bg_color.grid(column=1,row=2)
@@ -56,9 +55,9 @@ class ShowOnMonitor:
         self.bg_button=tk.Button(settingwindow, text='Change', command= self.choose_bg)
         self.bg_button.grid(column=2,row=2)
         
-        label2 = tk.Label(settingwindow,text='Font color',font=('Arial','20'),bg='white').grid(column=1,row=3)
+        label2 = tk.Label(settingwindow,text='Font color',font=('Arial','20')).grid(column=1,row=3)
         
-        fg_colors = ['blue','green','orange','yellow','red','white']
+        fg_colors = ['black','blue','green','orange','yellow','red','white']
         self.fg_color = ttk.Combobox(settingwindow, state='readonly')
         self.fg_color['values'] = fg_colors
         self.fg_color.grid(column=1,row=5)
@@ -66,9 +65,9 @@ class ShowOnMonitor:
         self.fg_button=tk.Button(settingwindow, text='Change', command= self.choose_fg)
         self.fg_button.grid(column=2,row=5)
         
-        label3 = tk.Label(settingwindow,text='Label background color',font=('Arial','20'),bg='white').grid(column=1,row=6)
+        label3 = tk.Label(settingwindow,text='Label background color',font=('Arial','20')).grid(column=1,row=6)
         
-        label_bg_colors=[["blue",'red','yellow'],['green','purple','yellow']]
+        label_bg_colors=[['green','red','yellow'],['blue','red','yellow'],['green','purple','yellow']]
         self.label_bg_color = ttk.Combobox(settingwindow, state='readonly')
         self.label_bg_color['values'] = label_bg_colors
         self.label_bg_color.grid(column=1,row=7)
@@ -76,7 +75,7 @@ class ShowOnMonitor:
         self.label_bg_button=tk.Button(settingwindow, text='Change', command= self.choose_label_bg)
         self.label_bg_button.grid(column=2,row=7)
         
-        label4 = tk.Label(settingwindow,text='Font',font=('Arial','20'),bg='white').grid(column=1,row=8)
+        label4 = tk.Label(settingwindow,text='Font',font=('Arial','20')).grid(column=1,row=8)
         
         fonts=['Arial','italic','Stencil']
         self.font_choose = ttk.Combobox(settingwindow, state='readonly')
@@ -86,7 +85,7 @@ class ShowOnMonitor:
         self.font_button=tk.Button(settingwindow, text='Change', command= self.choose_font)
         self.font_button.grid(column=2,row=9)
         
-        label4 = tk.Label(settingwindow,text='Text',font=('Arial','20'),bg='white').grid(column=1,row=10)
+        label4 = tk.Label(settingwindow,text='Text',font=('Arial','20')).grid(column=1,row=10)
         
         texts=[['pass','fail','incorrect'],['通過','失敗','沒戴好'],['合格','不合格','正しくない']]
         self.text_choose = ttk.Combobox(settingwindow, state='readonly')
@@ -95,7 +94,7 @@ class ShowOnMonitor:
         self.text_choose.current(0)
         self.text_button=tk.Button(settingwindow, text='Change', command= self.choose_text)
         self.text_button.grid(column=2,row=11)
-        
+        print(self.bg,self.label_bg,self.text,self.fg,self.font)
         settingwindow.mainloop()
     def show(self,result,img):
         #self.mybutton.destroy()
