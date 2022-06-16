@@ -21,6 +21,7 @@ class DetectMain:
         window.destroy()
         self.screen.setting()
         self.create_window()
+
     def soundsetting(self,window):
         window.destroy()
         
@@ -72,6 +73,7 @@ class DetectMain:
         
     def choose_model(self):
         self.camera_model.change_model(self.model_select.get())
+
     def create_window(self):
         window = tk.Tk()
         window.title('window')
@@ -107,4 +109,5 @@ class DetectMain:
             res, res_image = self.camera_model.image_processing()
             self.audio.speak_warning(res)
             self.screen.show(res, res_image)
+            
 detector=DetectMain()
