@@ -69,11 +69,11 @@ class Speaker():
     def get_volume(self):
         return self.__volume
     def get_with_texts(self):
-        return self.__volume
+        return self.__with_texts
     def get_no_texts(self):
-        return self.__volume
+        return self.__no_texts
     def get_no_proper_texts(self):
-        return self.__volume
+        return self.__no_proper_texts
     def set_warning(self,situation,text):
         try:
             if situation==0:
