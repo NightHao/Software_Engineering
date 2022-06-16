@@ -26,35 +26,8 @@ class Speaker():
         self.__no_texts={"en":"please wear on your mask","zh-tw":"請戴上口罩"}
         self.__no_proper_texts={"en":"please wear on your mask properly","zh-tw":"請戴好口罩，遮住口鼻"}
         
-    def setting(self):
-        soundwindow = tk.Tk()
-        soundwindow.title('sound')
-        soundwindow.geometry('1280x720')
-        label1 = tk.Label(soundwindow,text='Sound Setting',font=('Arial','24'),bg='white').grid(column=1,row=0)
-        label2 = tk.Label(soundwindow,text='Language',font=('Arial','20'),bg='white').grid(column=1,row=1)
-        languages = ["en","zh-tw"]
-        self.language = ttk.Combobox(soundwindow, state='readonly')
-        self.language['values'] = languages
-        self.language.grid(column=1,row=2)
-        self.language.current(0)
-        self.language_button=tk.Button(soundwindow, text='Change', command= self.choose_language)
-        self.language_button.grid(column=2,row=2)
-        
-        label3 = tk.Label(soundwindow,text='volume',font=('Arial','20'),bg='white').grid(column=1,row=3)
-        font = ('Arial', 20)
-        select = tk.IntVar()
-        scale = tk.Scale(label='Scale Widget', font=font, orient=tk.HORIZONTAL, showvalue=False,bg='green', fg='white', tickinterval=20, length=800, width=30,troughcolor='blue', variable=select, command=self.set_volume)
-        scale.grid(column=1,row=4)
-        self.label = tk.Label(text='', width=40, font=font)
-        self.label.grid(row=2, column=4)
-        
-        soundwindow.mainloop()
-        
-
     def choose_language(self):
         self.set_language(self.language.get())
-
-
     def speak_warning(self,situation):
         if situation==0:
             mytext=self.__with_texts.get(self.__language)
@@ -85,15 +58,14 @@ class Speaker():
         except:
             print('error when speak '+mylang+': '+mytext)
         
-
     def set_language(self,mylang):
         self.__language=mylang
 
-
     def set_volume(self,volume):
+        print(self.__volume)
         self.__volume=int(volume)/100
-
-
+    def get_volume(self):
+        return self.__volume
     def set_warning(self,situation,text):
         try:
             if situation==0:
@@ -108,28 +80,18 @@ class Speaker():
         except:
             print('Sound setup FAILED!')
 
-    def test_show(self):
-        print("language: "+self.__language)
-        print("situation 0: "+self.__with_texts[self.__language])
-        print("situation 0: "+self.__no_texts[self.__language])
-        print("situation 0: "+self.__no_proper_texts[self.__language])
-        print("volume: "+self.__volume)
-
-
-if __name__=='__main__':
-    speaker =Speaker()
-    print("start")
-    speaker.set_language("zh-tw")
-    speaker.set_warning(2,"遮住口鼻")
-    speaker.set_volume(100)
-    speaker.speak_warning(2)
-    speaker.set_volume(30)
-    speaker.speak_warning(2)
-    print("聲音測試結束，呼叫設定視窗，請按任意鍵繼續")
-    os.system("pause")
-    speaker.setting()
-    speaker.speak_warning(2)
-
+'''
+speaker =Speaker()
+print("start")
+# speaker.test()
+speaker.set_language("zh-tw")
+speaker.set_warning(2,"遮住口鼻")
+speaker.set_volume(100)
+speaker.speak_warning(2)
+speaker.set_volume(30)
+speaker.speak_warning(2)
+'''
 
 # according https://stackoverflow.com/a/64367776/17732660
 # gTTS of gtts doc https://gtts.readthedocs.io/en/latest/module.html#gtts.tts.gTTS
+
