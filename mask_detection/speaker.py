@@ -64,7 +64,15 @@ class Speaker():
     def set_volume(self,volume):
         print(self.__volume)
         self.__volume=int(volume)/100
+    def get_language(self):
+        return self.__language
     def get_volume(self):
+        return self.__volume
+    def get_with_texts(self):
+        return self.__volume
+    def get_no_texts(self):
+        return self.__volume
+    def get_no_proper_texts(self):
         return self.__volume
     def set_warning(self,situation,text):
         try:
