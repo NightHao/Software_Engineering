@@ -24,11 +24,16 @@ class DetectMain:
         window.destroy()
         self.audio.setting()
         self.create_window()
+        
+    def detectsetting(self,window):
+        window.destroy()
+        self.camera_model.setting()
+        self.create_window()
+        
     def create_window(self):
         window = tk.Tk()
         window.title('window')
         window.geometry('1280x720')
-    
         #detect_button = tk.Button(window, text='開始偵測',font=('Arial','24'),command = lambda: self.execute(window))
         imgBtn = tk.PhotoImage(file='start.png')
         #imgBtn=imgBtn.resize(imgBtn.width//3,imgBtn.height//3)
@@ -37,6 +42,8 @@ class DetectMain:
         setting_button = tk.Button(window, text='顯示設定',font=('Arial','24'),command = lambda: self.showsetting(window))
         setting_button.pack()
         setting_button = tk.Button(window, text='聲音設定',font=('Arial','24'),command = lambda: self.soundsetting(window))
+        setting_button.pack()
+        setting_button = tk.Button(window, text='模組設定',font=('Arial','24'),command = lambda: self.detectsetting(window))
         setting_button.pack()
         window.mainloop()
         

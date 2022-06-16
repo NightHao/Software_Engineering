@@ -3,6 +3,8 @@ from PIL import Image, ImageOps
 import numpy as np
 import argparse
 import cv2
+import tkinter as tk
+from tkinter import ttk
 from abc import ABC, abstractclassmethod, abstractmethod
 
 class Detect(ABC):
@@ -23,10 +25,24 @@ class Detect(ABC):
 class DetectCamera(Detect):
     def __init__(self):
         self.model = load_model('keras_model_strong.h5')
-    
+    def setting(self):
+        detectwindow = tk.Tk()
+        detectwindow.title('model setting')
+        detectwindow.geometry('800x800')
+        label1 = tk.Label(detectwindow,text='Detect Setting',font=('Arial','24')).grid(column=1,row=0)
+        label2 = tk.Label(detectwindow,text='Model',font=('Arial','20')).grid(column=1,row=1)
+        models = ['keras_model_strong.h5','keras_model.h5']
+        self.model_select = ttk.Combobox(detectwindow, state='readonly')
+        self.model_select['values'] = models
+        self.model_select.grid(column=1,row=2)
+        self.model_select.current(0)
+        self.model_button=tk.Button(detectwindow, text='Change', command= self.choose_model)
+        self.model_button.grid(column=2,row=2)
+        detectwindow.mainloop()
+    def choose_model(self):
+        self.change_model(self.model_select.get())
     def change_model(self, model):
-        self.model = model
-    
+        self.model = load_model(model)
     def image_processing(self):
         cap = cv2.VideoCapture(0)
         res_judge = []
@@ -122,6 +138,4 @@ class DetectImage(Detect):
 #detector=DetectImage()
 #detector.opt()
 #detector.image_processing()
-
-#test = DetectCamera()
 #test.image_processing()
