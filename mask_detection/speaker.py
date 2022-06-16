@@ -17,6 +17,7 @@ class Speaker():
     """
     #0: with mask 1: no mask 2: no proper mask
 
+
     def __init__(self):
         pygame.init()
         pygame.mixer.init()
@@ -26,8 +27,11 @@ class Speaker():
         self.__no_texts={"en":"please wear on your mask","zh-tw":"請戴上口罩"}
         self.__no_proper_texts={"en":"please wear on your mask properly","zh-tw":"請戴好口罩，遮住口鼻"}
         
+
     def choose_language(self):
         self.set_language(self.language.get())
+
+
     def speak_warning(self,situation):
         if situation==0:
             mytext=self.__with_texts.get(self.__language)
@@ -58,22 +62,36 @@ class Speaker():
         except:
             print('error when speak '+mylang+': '+mytext)
         
+
     def set_language(self,mylang):
         self.__language=mylang
+
 
     def set_volume(self,volume):
         print(self.__volume)
         self.__volume=int(volume)/100
+
+
     def get_language(self):
         return self.__language
+
+
     def get_volume(self):
         return self.__volume
+
+
     def get_with_texts(self):
         return self.__with_texts
+
+
     def get_no_texts(self):
         return self.__no_texts
+
+
     def get_no_proper_texts(self):
         return self.__no_proper_texts
+
+
     def set_warning(self,situation,text):
         try:
             if situation==0:
@@ -88,17 +106,30 @@ class Speaker():
         except:
             print('Sound setup FAILED!')
 
-'''
-speaker =Speaker()
-print("start")
-# speaker.test()
-speaker.set_language("zh-tw")
-speaker.set_warning(2,"遮住口鼻")
-speaker.set_volume(100)
-speaker.speak_warning(2)
-speaker.set_volume(30)
-speaker.speak_warning(2)
-'''
+
+if __name__=='__main__':
+    import random
+    speaker =Speaker()
+    print("start")
+    speaker.set_language("zh-tw")
+    speaker.set_warning(2,"遮住口鼻")
+    speaker.speak_warning(2)
+    for i in range(0,100,5):
+        if i%2==0:
+            speaker.set_language("zh-tw")
+        else:
+            speaker.set_language("en")
+        speaker.set_warning(2,str(i+random.randint(1,5)))
+        speaker.set_volume(i)
+        speaker.speak_warning(2)
+    speaker.set_language("zh-tw")
+    speaker.set_warning(2,"遮住口鼻")
+    speaker.set_volume(50)
+    speaker.speak_warning(2)
+    print("聲音測試結束，呼叫設定視窗，請按任意鍵繼續")
+    os.system("pause")
+    speaker.setting()
+    speaker.speak_warning(2)
 
 # according https://stackoverflow.com/a/64367776/17732660
 # gTTS of gtts doc https://gtts.readthedocs.io/en/latest/module.html#gtts.tts.gTTS
