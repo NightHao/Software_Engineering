@@ -126,10 +126,6 @@ if __name__=='__main__':
     speaker.set_warning(2,"遮住口鼻")
     speaker.set_volume(50)
     speaker.speak_warning(2)
-    print("聲音測試結束，呼叫設定視窗，請按任意鍵繼續")
-    os.system("pause")
-    speaker.setting()
-    speaker.speak_warning(2)
 
 # according https://stackoverflow.com/a/64367776/17732660
 # gTTS of gtts doc https://gtts.readthedocs.io/en/latest/module.html#gtts.tts.gTTS
